@@ -6,52 +6,49 @@ async function downloadPage(url) {
   return await request.loadString();
 }
 
-// Funktion zum Extrahieren der Daten aus dem HTML
-function extractDataFromHTML(html) {
+// Funktion zum Extrahieren der Schneehöhe aus dem HTML
+function extractSnowHeight(html) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
 
   const table = doc.querySelector("table.tblsort tbody");
   const rows = table.querySelectorAll("tr.row");
 
-  const data = [];
+  const snowData = [];
 
-  // Gehe durch jede Zeile und extrahiere Datum und Schneehöhe
+  // Gehe durch jede Zeile und extrahiere Schneehöhe
   rows.forEach(row => {
     const columns = row.querySelectorAll("td");
-    const date = columns[0].textContent.trim();
     const snowHeight = parseInt(columns[1].textContent.trim());
 
-    data.push({ date, snowHeight });
+    snowData.push(snowHeight);
   });
 
-  // Gib die extrahierten Daten zurück
-  return data.slice(0, 10); // Gib die letzten 10 Einträge zurück
+  // Gib die letzten 50 Schneehöhen zurück
+  return snowData.slice(0, 50);
 }
 
-// Funktion zum Erstellen des Widget-Inhalts
-async function createWidget() {
-  const html = await downloadPage(url); // Hier wird 'await' verwendet, daher muss die Funktion 'async' sein
-  const data = extractDataFromHTML(html);
+// Funktion zum Erstellen des Diagramms
+async function createChart() {
+  const html = await downloadPage(url);
+  const snowHeights = await extractSnowHeight(html);
 
   const widget = new ListWidget();
-  widget.addText("Schneehöhe in München");
+  const chart = new ChartWidget(500, 300);
 
-  // Erstelle eine Tabelle im Widget für die Datenanzeige
-  const table = widget.addTable(["Datum", "Schneehöhe"]);
-console.log(table)
-  // Füge die Daten zur Tabelle im Widget hinzu
-  data.forEach(entry => {
-    const row = table.addRow();
-    row.addText(entry.date);
-    row.addText(entry.snowHeight.toString());
-  });
+  // Füge Daten zum Diagramm hinzu
+  chart.addBarSeries(snowHeights, { color: Color.blue() });
+
+  widget.addText("Schneehöhe in München (Letzte 50 Werte)");
+  widget.addSpacer();
+  widget.setPadding(10, 10, 10, 10);
+  widget.addImage(chart);
 
   return widget;
 }
 
 async function main() {
-  const widget = await createWidget(); // 'await' wird hier verwendet, daher sollte auch diese Funktion 'async' sein
+  const widget = await createChart();
   if (config.runsInWidget) {
     Script.setWidget(widget);
   } else {
@@ -59,5 +56,4 @@ async function main() {
   }
 }
 
-// Starte die Hauptfunktion
 main();
