@@ -15,12 +15,16 @@
         let snowflakeEmoji = "❄️";
         let snowmanEmoji = "⛄️";
 
-        let locationText = widget.addText("München"); // Ortsname über der Zahl
+        // Stecknadel-Emoji Unicode
+        let pinEmoji = "\uD83D\uDCCD"; 
+
+        
+        let locationText = widget.addText(`${pinEmoji} München`); // Ortsname über der Zahl
         locationText.font = Font.boldSystemFont(12); // Kleinere Schriftgröße für den Ortsnamen
         locationText.leftAlignText(); // Text linksbündig
         locationText.textColor = Color.black(); // Schwarzer Text
 
-        let snowHeightText = widget.addText(snowHeight.toString()); // Schneehöhe als Zahl
+        let snowHeightText = widget.addText(snowHeight.toString() + " cm"); // Schneehöhe als Zahl
         snowHeightText.font = Font.boldSystemFont(48); // Mittlere Schriftgröße für die Schneehöhe
         snowHeightText.leftAlignText(); // Text linksbündig
         snowHeightText.textColor = Color.black(); // Schwarzer Text
