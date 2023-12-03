@@ -39,7 +39,7 @@ async function createWidget() {
 
   // Erstelle eine Tabelle im Widget für die Datenanzeige
   const table = widget.addTable(["Datum", "Schneehöhe"]);
-
+console.log(table)
   // Füge die Daten zur Tabelle im Widget hinzu
   data.forEach(entry => {
     const row = table.addRow();
