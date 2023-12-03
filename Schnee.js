@@ -1,6 +1,4 @@
-// Erstelle eine Funktion, die das Widget erstellt und zurückgibt
-
-    // Erstelle ein neues Widget
+// Erstelle ein neues Widget
     let widget = new ListWidget();
 
     // Setze den Hintergrund des Widgets auf eine beliebige Farbe
@@ -47,5 +45,3 @@
     // Zeige das aktualisierte Widget an
     Script.setWidget(widget);
     Script.complete();
-
-
