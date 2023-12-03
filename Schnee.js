@@ -15,10 +15,10 @@
 
         let snowEmoji = "❄️";
         let snowmanEmoji = "⛄️";
-        let textWithEmojis = `${snowEmoji} Aktuelle Schneehöhe: ${snowHeight} cm ${snowmanEmoji}`;
+        let textWithEmojis = `${snowEmoji} Aktuelle Schneehöhe in München: ${snowHeight} cm ${snowmanEmoji}`;
 
         let textItem = widget.addText(textWithEmojis);
-        textItem.font = Font.boldSystemFont(16);
+        textItem.font = Font.boldSystemFont(18);
     } else {
         let text = "Die Schneehöhe konnte nicht abgerufen werden.";
         widget.addText(text);
