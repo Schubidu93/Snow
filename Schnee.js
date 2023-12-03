@@ -1,5 +1,5 @@
 // Erstelle eine Funktion, die das Widget erstellt und zurückgibt
-async function createSnowWidget() {
+
     // Erstelle ein neues Widget
     let widget = new ListWidget();
 
@@ -48,11 +48,4 @@ async function createSnowWidget() {
     Script.setWidget(widget);
     Script.complete();
 
-    // Gib das Widget zurück
-    return widget;
-}
 
-// Exportiere die Funktion, damit sie in anderen Skripten verwendet werden kann
-module.exports = {
-    createSnowWidget
-};
