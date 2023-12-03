@@ -2,10 +2,6 @@
     let widget = new ListWidget();
     widget.backgroundColor = new Color("#E0FFFF"); // Hellblau für den Hintergrund
 
-    // Schneemann Emoji und Schneeflocke Emoji
-    let snowmanEmoji = "⛄️";
-    let snowflakeEmoji = "❄️";
-
     let url = "https://www.hnd.bayern.de/schnee/inn/muenchen-stadt-10865";
     let html = await new Request(url).loadString();
     
@@ -15,12 +11,24 @@
     if (match) {
         let snowHeight = parseInt(match[1]);
 
-        let snowMessage = `Aktuelle Schneehöhe in München: ${snowHeight} cm ${snowflakeEmoji} ${snowmanEmoji}`;
+        // Schnee Emoji und Schneeflocke Emoji
+        let snowflakeEmoji = "❄️";
+        let snowmanEmoji = "⛄️";
 
-        let textItem = widget.addText(snowMessage);
-        textItem.font = Font.boldSystemFont(24); // Schriftgröße erhöht
-        textItem.centerAlignText(); // Text zentrieren
-        textItem.textColor = Color.black(); // Schwarzer Text
+        let snowHeightText = widget.addText(snowHeight.toString());
+        snowHeightText.font = Font.boldSystemFont(60); // Große Schriftgröße für die Schneehöhe
+        snowHeightText.leftAlignText(); // Text linksbündig
+        snowHeightText.textColor = Color.black(); // Schwarzer Text
+
+        let locationText = widget.addText("München"); // Ortsname
+        locationText.font = Font.boldSystemFont(12); // Kleine Schriftgröße für den Ortsnamen
+        locationText.leftAlignText(); // Text linksbündig
+        locationText.textColor = Color.black(); // Schwarzer Text
+
+        let snowInfoText = widget.addText(`Schneehöhe ${snowflakeEmoji} ${snowmanEmoji}`); // Schneehöhe Info
+        snowInfoText.font = Font.boldSystemFont(10); // Kleine Schriftgröße für die Schneehöhe Info
+        snowInfoText.leftAlignText(); // Text linksbündig
+        snowInfoText.textColor = Color.black(); // Schwarzer Text
     } else {
         let text = "Es liegt kein Schnee oder die Daten konnten nicht abgerufen werden.";
         let textItem = widget.addText(text);
