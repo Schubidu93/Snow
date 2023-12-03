@@ -49,35 +49,6 @@ textItem.font = Font.boldSystemFont(16) // Ändere die Schriftgröße nach Bedar
 console.log(widget.text)
 
 
-
-// URL zur GitHub-Datei, die überprüft werden soll
-
-
-//let githubFileURL = "https://raw.githubusercontent.com/BENUTZER/REPO/main/DATEN.txt"
-
-let githubFileURL = "https://raw.githubusercontent.com/Schubidu93/Scriptable/main/Schnee"
-
-// Überprüfe die GitHub-Datei auf Aktualisierungen
-async function checkForUpdates() {
-    let req = new Request(githubFileURL)
-    let currentData = widget.text
-    
-    try {
-        let newData = await req.loadString()
-        if (newData != currentData) {
-            // Aktualisiere das Widget mit den neuen Daten
-            updateWidgetWithData(newData)
-        }
-    } catch (error) {
-        console.log("Fehler beim Laden der Daten:", error)
-    }
-}
-
-// Funktion zum Aktualisieren des Widgets mit neuen Daten
-function updateWidgetWithData(newData) {
-    // Setze die neuen Daten im Widget
-    widget.text = newData
-    
     // Zeige das aktualisierte Widget an
     Script.setWidget(widget)
     Script.complete()
