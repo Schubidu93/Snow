@@ -15,17 +15,17 @@
         let snowflakeEmoji = "❄️";
         let snowmanEmoji = "⛄️";
 
-        let snowHeightText = widget.addText(snowHeight.toString());
-        snowHeightText.font = Font.boldSystemFont(60); // Große Schriftgröße für die Schneehöhe
-        snowHeightText.leftAlignText(); // Text linksbündig
-        snowHeightText.textColor = Color.black(); // Schwarzer Text
-
-        let locationText = widget.addText("München"); // Ortsname
-        locationText.font = Font.boldSystemFont(12); // Kleine Schriftgröße für den Ortsnamen
+        let locationText = widget.addText("München"); // Ortsname über der Zahl
+        locationText.font = Font.boldSystemFont(14); // Kleinere Schriftgröße für den Ortsnamen
         locationText.leftAlignText(); // Text linksbündig
         locationText.textColor = Color.black(); // Schwarzer Text
 
-        let snowInfoText = widget.addText(`Schneehöhe ${snowflakeEmoji} ${snowmanEmoji}`); // Schneehöhe Info
+        let snowHeightText = widget.addText(snowHeight.toString()); // Schneehöhe als Zahl
+        snowHeightText.font = Font.boldSystemFont(40); // Mittlere Schriftgröße für die Schneehöhe
+        snowHeightText.leftAlignText(); // Text linksbündig
+        snowHeightText.textColor = Color.black(); // Schwarzer Text
+
+        let snowInfoText = widget.addText(`Schneehöhe\n${snowflakeEmoji} ${snowmanEmoji}`); // Schneehöhe Info mit Emojis
         snowInfoText.font = Font.boldSystemFont(10); // Kleine Schriftgröße für die Schneehöhe Info
         snowInfoText.leftAlignText(); // Text linksbündig
         snowInfoText.textColor = Color.black(); // Schwarzer Text
