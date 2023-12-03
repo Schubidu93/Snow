@@ -19,10 +19,12 @@
 
         let textItem = widget.addText(textWithEmojis);
         textItem.font = Font.boldSystemFont(26); // Größere Schriftgröße für bessere Lesbarkeit
+        textItem.centerAlignText(); // Text zentrieren
     } else {
         let text = "Die Schneehöhe konnte nicht abgerufen werden.";
         let textItem = widget.addText(text);
         textItem.font = Font.boldSystemFont(18); // Größere Schriftgröße für bessere Lesbarkeit
+        textItem.centerAlignText(); // Text zentrieren
     }
 
     Script.setWidget(widget);
