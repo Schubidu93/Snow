@@ -54,5 +54,8 @@ console.log(widget.text)
     Script.complete()
 }
 
+module.exports = {
+    widget // Hier exportierst du das Widget oder andere Funktionen
+};
 // Führe die Funktion zur Überprüfung auf Aktualisierungen aus
 //await checkForUpdates()
