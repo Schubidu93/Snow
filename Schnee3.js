@@ -31,7 +31,7 @@ function extractDataFromHTML(html) {
 
 // Funktion zum Erstellen des Widget-Inhalts
 async function createWidget() {
-  const html = await downloadPage(url);
+  const html = await downloadPage(url); // Hier wird 'await' verwendet, daher muss die Funktion 'async' sein
   const data = extractDataFromHTML(html);
 
   const widget = new ListWidget();
@@ -50,10 +50,14 @@ async function createWidget() {
   return widget;
 }
 
-// Anzeigen des Widgets
-const widget = await createWidget();
-if (config.runsInWidget) {
-  Script.setWidget(widget);
-} else {
-  widget.presentMedium();
+async function main() {
+  const widget = await createWidget(); // 'await' wird hier verwendet, daher sollte auch diese Funktion 'async' sein
+  if (config.runsInWidget) {
+    Script.setWidget(widget);
+  } else {
+    widget.presentMedium();
+  }
 }
+
+// Starte die Hauptfunktion
+main();
