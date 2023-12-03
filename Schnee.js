@@ -55,4 +55,4 @@ console.log(widget.text)
 }
 
 // Führe die Funktion zur Überprüfung auf Aktualisierungen aus
-await checkForUpdates()
+//await checkForUpdates()
