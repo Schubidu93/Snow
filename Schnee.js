@@ -18,10 +18,11 @@
         let textWithEmojis = `${snowEmoji} Aktuelle Schneehöhe in München: ${snowHeight} cm ${snowmanEmoji}`;
 
         let textItem = widget.addText(textWithEmojis);
-        textItem.font = Font.boldSystemFont(18);
+        textItem.font = Font.boldSystemFont(26); // Größere Schriftgröße für bessere Lesbarkeit
     } else {
         let text = "Die Schneehöhe konnte nicht abgerufen werden.";
-        widget.addText(text);
+        let textItem = widget.addText(text);
+        textItem.font = Font.boldSystemFont(18); // Größere Schriftgröße für bessere Lesbarkeit
     }
 
     Script.setWidget(widget);
