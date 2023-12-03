@@ -1,10 +1,10 @@
 // Stelle eine Verbindung mit GitHub her und überprüfe auf Aktualisierungen
 async function checkGitHubForUpdates() {
-    let githubFileURL = "https://raw.githubusercontent.com/DEIN_REPO/DEIN_FILE.js";
+    let githubFileURL = "https://raw.githubusercontent.com/Schubidu93/Scriptable/main/Schnee.js";
 
     try {
         let req = new Request(githubFileURL);
-        let currentCode = importModule("DEIN_FILE");
+        let currentCode = importModule("Schnee");
         let newCode = await req.loadString();
 
         if (newCode !== currentCode) {
@@ -21,7 +21,7 @@ async function updateWidgetWithNewCode(newCode) {
     try {
         let fm = FileManager.local();
         let scriptableDir = fm.documentsDirectory();
-        let widgetPath = scriptableDir + "/DEIN_FILE.js";
+        let widgetPath = scriptableDir + "/Schnee.js";
 
         // Speichere den neuen Code in der lokalen Datei
         fm.writeString(widgetPath, newCode);
