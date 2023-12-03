@@ -12,7 +12,8 @@
     let url = "https://www.hnd.bayern.de/schnee/inn/muenchen-stadt-10865";
 
     // Lade den Inhalt der Webseite als Text
-    let html = await new Request(url).loadString();
+ //   let html = await new Request(url).loadString();
+ let html = await  Request(url).loadString();
     // console.log(html)
     // Suche nach dem Element, das die Schneehöhe enthält
     let regex = /Schneehöhe vom .* Uhr: <b>(\d+)<\/b> cm/;
