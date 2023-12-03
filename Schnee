@@ -31,7 +31,7 @@ console.log(snowHeight)
 // Füge winterliche Emojis dem Text hinzu
 let snowEmoji = "❄️"
 let snowmanEmoji = "⛄️"
-let textWithEmojis = `${snowEmoji} Schneehöhe: ${snowHeight} cm ${snowmanEmoji}`
+let textWithEmojis = `${snowEmoji} Aktuelle Schneehöhe: ${snowHeight} cm ${snowmanEmoji}`
 
 // Füge den Text mit Emojis dem Widget hinzu
 let textItem = widget.addText(textWithEmojis)
