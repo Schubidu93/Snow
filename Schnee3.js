@@ -28,27 +28,29 @@ function extractSnowHeight(html) {
   return snowData.slice(0, 50);
 }
 
-// Funktion zum Erstellen des Diagramms
-async function createChart() {
+// Funktion zum Erstellen des Diagramms als Bild
+async function createChartImage(snowHeights) {
+  const chart = new Chart(500, 300);
+  chart.addBarSeries(snowHeights, { color: Color.blue() });
+
+  return chart.getImage();
+}
+
+async function createWidget() {
   const html = await downloadPage(url);
   const snowHeights = await extractSnowHeight(html);
 
   const widget = new ListWidget();
-  const chart = new ChartWidget(500, 300);
+  const chartImage = await createChartImage(snowHeights);
 
-  // Füge Daten zum Diagramm hinzu
-  chart.addBarSeries(snowHeights, { color: Color.blue() });
-
-  widget.addText("Schneehöhe in München (Letzte 50 Werte)");
-  widget.addSpacer();
-  widget.setPadding(10, 10, 10, 10);
-  widget.addImage(chart);
+  widget.backgroundImage = chartImage;
+  widget.url = url; // Verlinkt das Widget auf die Webseite für weitere Details
 
   return widget;
 }
 
 async function main() {
-  const widget = await createChart();
+  const widget = await createWidget();
   if (config.runsInWidget) {
     Script.setWidget(widget);
   } else {
