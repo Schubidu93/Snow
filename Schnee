@@ -1,6 +1,8 @@
 // Erstelle ein neues Widget
 let widget = new ListWidget()
 
+// ... (dein vorhandener Code bleibt unverändert)
+
 // Setze den Hintergrund des Widgets auf eine beliebige Farbe
 widget.backgroundColor = new Color("#4682B4")
 
@@ -29,7 +31,7 @@ console.log(snowHeight)
 // Füge winterliche Emojis dem Text hinzu
 let snowEmoji = "❄️"
 let snowmanEmoji = "⛄️"
-let textWithEmojis = `${snowEmoji} Aktuelle Schneehöhe in München: ${snowHeight} cm ${snowmanEmoji}`
+let textWithEmojis = `${snowEmoji} Schneehöhe: ${snowHeight} cm ${snowmanEmoji}`
 
 // Füge den Text mit Emojis dem Widget hinzu
 let textItem = widget.addText(textWithEmojis)
@@ -45,6 +47,41 @@ textItem.font = Font.boldSystemFont(16) // Ändere die Schriftgröße nach Bedar
 }
 
 console.log(widget.text)
-// Zeige das Widget an
-Script.setWidget(widget)
-Script.complete()
+
+
+
+// URL zur GitHub-Datei, die überprüft werden soll
+
+
+//let githubFileURL = "https://raw.githubusercontent.com/BENUTZER/REPO/main/DATEN.txt"
+
+let githubFileURL = "https://raw.githubusercontent.com/Schubidu93/Scriptable/main/Schnee"
+
+// Überprüfe die GitHub-Datei auf Aktualisierungen
+async function checkForUpdates() {
+    let req = new Request(githubFileURL)
+    let currentData = widget.text
+    
+    try {
+        let newData = await req.loadString()
+        if (newData != currentData) {
+            // Aktualisiere das Widget mit den neuen Daten
+            updateWidgetWithData(newData)
+        }
+    } catch (error) {
+        console.log("Fehler beim Laden der Daten:", error)
+    }
+}
+
+// Funktion zum Aktualisieren des Widgets mit neuen Daten
+function updateWidgetWithData(newData) {
+    // Setze die neuen Daten im Widget
+    widget.text = newData
+    
+    // Zeige das aktualisierte Widget an
+    Script.setWidget(widget)
+    Script.complete()
+}
+
+// Führe die Funktion zur Überprüfung auf Aktualisierungen aus
+await checkForUpdates()
