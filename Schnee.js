@@ -18,39 +18,30 @@
         // Stecknadel-Emoji Unicode
         let pinEmoji = "\uD83D\uDCCD"; 
 
-        let stack = widget.addStack();
-        stack.layoutVertically();
-
-        let locationText = stack.addText(`${pinEmoji} München`); // Ortsname über der Zahl
+        
+        let locationText = widget.addText(`${pinEmoji} München`); // Ortsname über der Zahl
         locationText.font = Font.regularSystemFont(12); // Kleinere Schriftgröße für den Ortsnamen
+        locationText.leftAlignText(); // Text linksbündig
         locationText.textColor = Color.white(); // Schwarzer Text
 
-        let snowHeightStack = stack.addStack();
-        snowHeightStack.layoutHorizontally();
-        snowHeightStack.leftAlignContent();
-
-        let snowHeightText = snowHeightStack.addText(snowHeight.toString()); // Schneehöhe als Zahl
-        snowHeightText.font = Font.regularSystemFont(48); // Mittlere Schriftgröße für die Schneehöhe
+        let snowHeightText = widget.addText(snowHeight.toString() + "cm"); // Schneehöhe als Zahl
+        snowHeightText.font = Font.regularSystemFont(40); // Mittlere Schriftgröße für die Schneehöhe
+        snowHeightText.leftAlignText(); // Text linksbündig
         snowHeightText.textColor = Color.white(); // Schwarzer Text
 
-        let cmText = stack.addText("cm"); // Einheit für die Schneehöhe
-        cmText.font = Font.regularSystemFont(10); // Kleinere Schriftgröße für die Einheit
-        cmText.textColor = Color.white(); // Schwarzer Text
-        cmText.leftAlignText(); // Links ausrichten für die Einheitstext
-
-        let snowInfoText = stack.addText(`Schneehöhe`); // Schneehöhe Info mit Emojis
+        let snowInfoText = widget.addText(`Schneehöhe`); // Schneehöhe Info mit Emojis
         snowInfoText.font = Font.regularSystemFont(12); // Kleine Schriftgröße für die Schneehöhe Info
+        snowInfoText.leftAlignText(); // Text linksbündig
         snowInfoText.textColor = Color.white(); // Schwarzer Text
-        snowInfoText.leftAlignText(); // Links ausrichten für die Info-Text
 
-        let Extratext = stack.addText(`${snowflakeEmoji} ${snowmanEmoji}`); // Schneehöhe Info mit Emojis
+        let Extratext = widget.addText(`${snowflakeEmoji} ${snowmanEmoji}`); // Schneehöhe Info mit Emojis
         Extratext.font = Font.regularSystemFont(24); // Kleine Schriftgröße für die Schneehöhe Info
+        Extratext.leftAlignText(); // Text linksbündig
         Extratext.textColor = Color.white(); // Schwarzer Text
-        Extratext.leftAlignText(); // Links ausrichten für den Emoji-Text
     } else {
         let text = "Es liegt kein Schnee oder die Daten konnten nicht abgerufen werden.";
         let textItem = widget.addText(text);
-        textItem.font = Font.regularSystemFont(24); // Schriftgröße erhöht
+        textItem.font = Font.regularSystemFont(20); // Schriftgröße erhöht
         textItem.centerAlignText(); // Text zentrieren
         textItem.textColor = Color.white(); // Schwarzer Text
     }
