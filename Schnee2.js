@@ -1,58 +1,64 @@
-// Erstelle ein neues Widget
-let widget = new ListWidget()
+(async () => {
+    let widget = new ListWidget();
+    widget.backgroundColor = new Color("#4682B4"); // Hellblau für den Hintergrund
+    
+    // Platzierung des Widgets weiter links
+    widget.url = "scriptable:///run"; // Öffnet die Scriptable-App beim Tippen auf das Widget
+    widget.setPadding(10, 10, 10, 10); // Fügt etwas Abstand hinzu, um das Widget weiter links zu platzieren
 
-// ... (dein vorhandener Code bleibt unverändert)
+    let url = "https://www.hnd.bayern.de/schnee/inn/muenchen-stadt-10865";
+    let html = await new Request(url).loadString();
+    
+    let regex = /Schneehöhe vom .* Uhr: <b>(\d+)<\/b> cm/;
+    let match = regex.exec(html);
+    
+    if (match) {
+        let snowHeight = parseInt(match[1]);
 
-// Setze den Hintergrund des Widgets auf eine beliebige Farbe
-widget.backgroundColor = new Color("#4682B4")
+        // Schnee Emoji und Schneeflocke Emoji
+        let snowflakeEmoji = "❄️";
+        let snowmanEmoji = "⛄️";
 
-// Setze die Textfarbe auf Weiß
-let textColor = Color.white()
-widget.textColor = textColor
+        // Stecknadel-Emoji Unicode
+        let pinEmoji = "\uD83D\uDCCD"; 
 
-// Erstelle eine URL zu der Webseite, von der du die Schneehöhe abrufen willst
-let url = "https://www.hnd.bayern.de/schnee/inn/muenchen-stadt-10865"
+        let stack = widget.addStack();
+        stack.layoutVertically();
 
-// Lade den Inhalt der Webseite als Text
-let html = await new Request(url).loadString()// 
-// console.log(html)
-// Suche nach dem Element, das die Schneehöhe enthält
-let regex = /Schneehöhe vom .* Uhr: <b>(\d+)<\/b> cm/
+        let locationText = stack.addText(`${pinEmoji} München`); // Ortsname über der Zahl
+        locationText.font = Font.regularSystemFont(12); // Kleinere Schriftgröße für den Ortsnamen
+        locationText.textColor = Color.white(); // Schwarzer Text
 
-// Extrahiere die Schneehöhe aus dem Text
-let match = regex.exec(html)
-console.log(match)
-// Überprüfe, ob die Schneehöhe gefunden wurde
-if (match) {
-  // Speichere die Schneehöhe als Zahl
-  let snowHeight = parseInt(match[1])
-console.log(snowHeight)
+        let snowHeightStack = stack.addStack();
+        snowHeightStack.layoutHorizontally();
+        snowHeightStack.leftAlignContent();
 
-// Füge winterliche Emojis dem Text hinzu
-let snowEmoji = "❄️"
-let snowmanEmoji = "⛄️"
-let textWithEmojis = `${snowEmoji} Aktuelle Schneehöhe: ${snowHeight} cm ${snowmanEmoji}`
+        let snowHeightText = snowHeightStack.addText(snowHeight.toString()); // Schneehöhe als Zahl
+        snowHeightText.font = Font.regularSystemFont(40); // Mittlere Schriftgröße für die Schneehöhe
+        snowHeightText.textColor = Color.white(); // Schwarzer Text
 
-// Füge den Text mit Emojis dem Widget hinzu
-let textItem = widget.addText(textWithEmojis)
-textItem.font = Font.boldSystemFont(16) // Ändere die Schriftgröße nach Bedarf
+        let cmText = stack.addText("cm"); // Einheit für die Schneehöhe
+        cmText.font = Font.regularSystemFont(10); // Kleinere Schriftgröße für die Einheit
+        cmText.textColor = Color.white(); // Schwarzer Text
+        cmText.leftAlignText(); // Links ausrichten für die Einheitstext
 
-} else {
-  // Erstelle einen Text für das Widget, wenn die Schneehöhe nicht gefunden wurde
-  let text = "Die Schneehöhe konnte nicht abgerufen werden."
+        let snowInfoText = stack.addText(`Schneehöhe`); // Schneehöhe Info mit Emojis
+        snowInfoText.font = Font.regularSystemFont(12); // Kleine Schriftgröße für die Schneehöhe Info
+        snowInfoText.textColor = Color.white(); // Schwarzer Text
+        snowInfoText.leftAlignText(); // Links ausrichten für die Info-Text
 
-  // Füge den Text dem Widget hinzu
-  widget.addText(text)
+        let Extratext = stack.addText(`${snowflakeEmoji} ${snowmanEmoji}`); // Schneehöhe Info mit Emojis
+        Extratext.font = Font.regularSystemFont(24); // Kleine Schriftgröße für die Schneehöhe Info
+        Extratext.textColor = Color.white(); // Schwarzer Text
+        Extratext.leftAlignText(); // Links ausrichten für den Emoji-Text
+    } else {
+        let text = "Es liegt kein Schnee oder die Daten konnten nicht abgerufen werden.";
+        let textItem = widget.addText(text);
+        textItem.font = Font.regularSystemFont(24); // Schriftgröße erhöht
+        textItem.centerAlignText(); // Text zentrieren
+        textItem.textColor = Color.white(); // Schwarzer Text
+    }
 
-}
-
-console.log(widget.text)
-
-
-    // Zeige das aktualisierte Widget an
-    Script.setWidget(widget)
-    Script.complete()
-}
-
-// Führe die Funktion zur Überprüfung auf Aktualisierungen aus
-await checkForUpdates()
+    Script.setWidget(widget);
+    Script.complete();
+})();
