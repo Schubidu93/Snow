@@ -28,7 +28,7 @@
         snowHeightText.font = Font.regularSystemFont(40); // Mittlere Schriftgröße für die Schneehöhe
         snowHeightText.leftAlignText(); // Text linksbündig
         snowHeightText.textColor = Color.white(); // Schwarzer Text
-        widget.addSpacer(10); // Größerer Zeilenabstand
+        widget.addSpacer(30); // Größerer Zeilenabstand
 
         let snowInfoText = widget.addText(`Schneehöhe`); // Schneehöhe Info mit Emojis
         snowInfoText.font = Font.regularSystemFont(12); // Kleine Schriftgröße für die Schneehöhe Info
