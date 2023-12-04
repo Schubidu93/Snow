@@ -20,7 +20,7 @@
 
         
         let locationText = widget.addText(`${pinEmoji} München`); // Ortsname über der Zahl
-        locationText.font = Font.regularSystemFont(12); // Kleinere Schriftgröße für den Ortsnamen
+        locationText.font = Font.regularSystemFont(14); // Kleinere Schriftgröße für den Ortsnamen
         locationText.leftAlignText(); // Text linksbündig
         locationText.textColor = Color.white(); // Schwarzer Text
 
@@ -33,7 +33,7 @@
         snowHeightText.textColor = Color.white(); // Schwarzer Text
         
         let cmText = snowHeightStack.addText(" cm"); // "cm" Text
-        cmText.font = Font.regularSystemFont(12); // Kleinere Schriftgröße für "cm"
+        cmText.font = Font.regularSystemFont(14); // Kleinere Schriftgröße für "cm"
         cmText.textColor = Color.white(); // Schwarzer Text
 
 
@@ -42,7 +42,7 @@
         widget.addSpacer(20); // Größerer Zeilenabstand
 
         let snowInfoText = widget.addText(`Schneehöhe`); // Schneehöhe Info mit Emojis
-        snowInfoText.font = Font.regularSystemFont(12); // Kleine Schriftgröße für die Schneehöhe Info
+        snowInfoText.font = Font.regularSystemFont(14); // Kleine Schriftgröße für die Schneehöhe Info
         snowInfoText.leftAlignText(); // Text linksbündig
         snowInfoText.textColor = Color.white(); // Schwarzer Text
 
