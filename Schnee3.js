@@ -53,11 +53,11 @@ async function createWidget() {
 
 async function main() {
   const widget = await createWidget();
-  if (config.runsInWidget) {
+  //if (config.runsInWidget) {
     Script.setWidget(widget);
-  } else {
-    widget.presentMedium();
-  }
+  //} else {
+    //widget.presentMedium();
+ // }
 }
 
 main();
