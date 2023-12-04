@@ -24,7 +24,7 @@
         locationText.leftAlignText(); // Text linksbündig
         locationText.textColor = Color.black(); // Schwarzer Text
 
-        let snowHeightText = widget.addText(snowHeight.toString() + " cm"); // Schneehöhe als Zahl
+        let snowHeightText = widget.addText(snowHeight.toString() + "cm"); // Schneehöhe als Zahl
         snowHeightText.font = Font.boldSystemFont(40); // Mittlere Schriftgröße für die Schneehöhe
         snowHeightText.leftAlignText(); // Text linksbündig
         snowHeightText.textColor = Color.black(); // Schwarzer Text
@@ -35,7 +35,7 @@
         snowInfoText.textColor = Color.black(); // Schwarzer Text
 
         let Extratext = widget.addText(`${snowflakeEmoji} ${snowmanEmoji}`); // Schneehöhe Info mit Emojis
-        Extratext.font = Font.boldSystemFont(20); // Kleine Schriftgröße für die Schneehöhe Info
+        Extratext.font = Font.boldSystemFont(24); // Kleine Schriftgröße für die Schneehöhe Info
         Extratext.leftAlignText(); // Text linksbündig
         Extratext.textColor = Color.black(); // Schwarzer Text
     } else {
