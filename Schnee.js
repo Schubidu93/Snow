@@ -27,7 +27,7 @@
 
         let snowHeightStack = stack.addStack();
         snowHeightStack.layoutHorizontally();
-        snowHeightStack.centerAlignContent();
+        snowHeightStack.leftAlignContent();
 
         let snowHeightText = snowHeightStack.addText(snowHeight.toString()); // Schneehöhe als Zahl
         snowHeightText.font = Font.regularSystemFont(40); // Mittlere Schriftgröße für die Schneehöhe
