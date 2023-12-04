@@ -34,9 +34,9 @@
         let cmStack = mainStack.addStack();
         cmStack.layoutVertically();
         
-        cmStack.addSpacer(24); // Verstellbare Spacer-Größe für die Ausrichtung
-        let cmText = cmStack.addText("cm");
-        cmText.font = Font.regularSystemFont(12);
+        cmStack.addSpacer(30); // Verstellbare Spacer-Größe für die Ausrichtung
+        let cmText = cmStack.addText(" cm");
+        cmText.font = Font.regularSystemFont(14);
         cmText.textColor = Color.white();
 
         
