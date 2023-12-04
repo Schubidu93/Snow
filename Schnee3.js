@@ -59,5 +59,5 @@ async function main() {
     //widget.presentMedium();
  // }
 }
-
+Script.setWidget(widget)
 main();
