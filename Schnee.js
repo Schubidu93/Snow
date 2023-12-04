@@ -36,14 +36,17 @@
         let cmText = stack.addText("cm"); // Einheit für die Schneehöhe
         cmText.font = Font.regularSystemFont(10); // Kleinere Schriftgröße für die Einheit
         cmText.textColor = Color.white(); // Schwarzer Text
+        cmText.leftAlignText(); // Links ausrichten für die Einheitstext
 
         let snowInfoText = stack.addText(`Schneehöhe`); // Schneehöhe Info mit Emojis
         snowInfoText.font = Font.regularSystemFont(12); // Kleine Schriftgröße für die Schneehöhe Info
         snowInfoText.textColor = Color.white(); // Schwarzer Text
+        snowInfoText.leftAlignText(); // Links ausrichten für die Info-Text
 
         let Extratext = stack.addText(`${snowflakeEmoji} ${snowmanEmoji}`); // Schneehöhe Info mit Emojis
         Extratext.font = Font.regularSystemFont(24); // Kleine Schriftgröße für die Schneehöhe Info
         Extratext.textColor = Color.white(); // Schwarzer Text
+        Extratext.leftAlignText(); // Links ausrichten für den Emoji-Text
     } else {
         let text = "Es liegt kein Schnee oder die Daten konnten nicht abgerufen werden.";
         let textItem = widget.addText(text);
