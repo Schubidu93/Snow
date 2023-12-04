@@ -41,7 +41,7 @@
         
         widget.addSpacer(20); // Größerer Zeilenabstand
 
-        let snowInfoText = widget.addText(`Schneehöhe`); // Schneehöhe Info mit Emojis
+        let snowInfoText = widget.addText(`Schneehöhen`); // Schneehöhe Info mit Emojis
         snowInfoText.font = Font.regularSystemFont(14); // Kleine Schriftgröße für die Schneehöhe Info
         snowInfoText.leftAlignText(); // Text linksbündig
         snowInfoText.textColor = Color.white(); // Schwarzer Text
