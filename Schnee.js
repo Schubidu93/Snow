@@ -41,7 +41,7 @@
     } else {
         let text = "Es liegt kein Schnee oder die Daten konnten nicht abgerufen werden.";
         let textItem = widget.addText(text);
-        textItem.font = Font.regularSystemFont(20); // Schriftgröße erhöht
+        textItem.font = Font.regularSystemFont(24); // Schriftgröße erhöht
         textItem.centerAlignText(); // Text zentrieren
         textItem.textColor = Color.white(); // Schwarzer Text
     }
