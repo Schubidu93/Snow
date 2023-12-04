@@ -30,7 +30,7 @@
         snowHeightStack.leftAlignContent();
 
         let snowHeightText = snowHeightStack.addText(snowHeight.toString()); // Schneehöhe als Zahl
-        snowHeightText.font = Font.regularSystemFont(40); // Mittlere Schriftgröße für die Schneehöhe
+        snowHeightText.font = Font.regularSystemFont(48); // Mittlere Schriftgröße für die Schneehöhe
         snowHeightText.textColor = Color.white(); // Schwarzer Text
 
         let cmText = stack.addText("cm"); // Einheit für die Schneehöhe
