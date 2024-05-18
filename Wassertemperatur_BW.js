@@ -1,4 +1,5 @@
-// Widget-Parameter
+(async () => {
+    // Widget-Parameter
 const widgetParameter = args.widgetParameter;
 
 // Webseite laden und HTML parsen
@@ -26,3 +27,4 @@ if (config.runsInWidget) {
   widget.presentSmall();
 }
 Script.complete();
+})();
