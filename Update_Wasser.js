@@ -4,7 +4,7 @@ async function checkGitHubForUpdates() {
 
     try {
         let req = new Request(githubFileURL);
-        let currentCode = importModule("Schnee");
+        let currentCode = importModule("Wassertemperatur_BW");
         let newCode = await req.loadString();
 
         if (newCode !== currentCode) {
