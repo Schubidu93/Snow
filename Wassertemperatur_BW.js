@@ -66,7 +66,7 @@
         
         widget.addSpacer(2);
         
-        let textMuenchen = widget.addText('München: ' + tempMuenchen);
+        let textMuenchen = widget.addText('Eisbach: ' + tempMuenchen);
         textMuenchen.textColor = Color.white();
         textMuenchen.font = Font.systemFont(14); // Schriftgröße reduzieren
         
