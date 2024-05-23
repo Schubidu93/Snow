@@ -49,44 +49,50 @@
         }
     }
 
-    // Hauptfunktion zur Erstellung des Widgets
+// Funktion zur Erstellung des Widgets
     async function createWidget() {
+        // Wassertemperaturen von den verschiedenen Orten abrufen
         const tempBadWaldsee = await fetchWaterTemperatureBadWaldsee();
         const tempMuenchen = await fetchWaterTemperatureMuenchen();
         const tempFeringasee = await fetchWaterTemperatureFeringasee();
         
+        // Widget erstellen
         let widget = new ListWidget();
         widget.backgroundColor = new Color("#4682B4"); // Hintergrundfarbe setzen
+
+        // Ort und Wassertemperatur anzeigen
+        let locationStack = widget.addStack();
+        locationStack.layoutVertically();
+        locationStack.addSpacer(); // Platzhalter für oberen Rand
         
-        let title = widget.addText('Wasser');
-        title.textColor = Color.white();
-        title.font = Font.systemFont(14); // Schriftgröße des Titels auf 14 setzen
-        widget.addSpacer(4);
+        // Ortsname anzeigen
+        let locationText = locationStack.addText("Wasser");
+        locationText.font = Font.regularSystemFont(14); // Schriftgröße festlegen
+        locationText.leftAlignText(); // Text linksbündig ausrichten
+        locationText.textColor = Color.white(); // Textfarbe festlegen
         
-        // Funktion zum Hinzufügen von Temperaturen mit Ausrichtung
-        function addTemperatureRow(location, temperature) {
-            let stack = widget.addStack();
-            stack.layoutHorizontally();
-            
-            let locationText = stack.addText(location);
-            locationText.textColor = Color.white();
-            locationText.font = Font.systemFont(14); // Schriftgröße der Standortangabe auf 14 setzen
-            
-            stack.addSpacer(); // Leerzeichen einfügen, um rechtsbündige Ausrichtung der Temperatur zu ermöglichen
-            
-            let temperatureText = stack.addText(temperature);
-            temperatureText.textColor = Color.white();
-            temperatureText.font = Font.systemFont(20); // Schriftgröße der Temperaturanzeige auf 20 setzen
-            
-            widget.addSpacer(2);
-        }
-        
-        // Temperaturen hinzufügen
-        addTemperatureRow('Stadtsee', tempBadWaldsee);
-        addTemperatureRow('Eisbach', tempMuenchen);
-        addTemperatureRow('Feringasee', tempFeringasee);
+        // Wassertemperaturen anzeigen
+        addTemperatureRow(locationStack, 'Stadtsee', tempBadWaldsee);
+        addTemperatureRow(locationStack, 'Eisbach', tempMuenchen);
+        addTemperatureRow(locationStack, 'Feringasee', tempFeringasee);
         
         return widget;
+    }
+
+    // Funktion zum Hinzufügen einer Zeile mit Ortsname und Wassertemperatur
+    function addTemperatureRow(stack, location, temperature) {
+        let stackRow = stack.addStack();
+        stackRow.layoutHorizontally();
+        
+        let locationText = stackRow.addText(location + ': ');
+        locationText.textColor = Color.white();
+        locationText.font = Font.systemFont(14);
+        
+        stackRow.addSpacer();
+        
+        let temperatureText = stackRow.addText(temperature);
+        temperatureText.textColor = Color.white();
+        temperatureText.font = Font.systemFont(20);
     }
 
     // Widget erstellen und anzeigen
