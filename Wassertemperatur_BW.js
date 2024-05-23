@@ -58,9 +58,9 @@
         let widget = new ListWidget();
         widget.backgroundColor = new Color("#4682B4"); // Hintergrundfarbe setzen
         
-        let title = widget.addText('Wassertemperaturen:');
+        let title = widget.addText('Wasser');
         title.textColor = Color.white();
-        title.font = Font.boldSystemFont(10); // Schriftgröße des Titels auf 10 reduzieren
+        title.font = Font.boldSystemFont(14); // Schriftgröße des Titels auf 14 setzen
         widget.addSpacer(4);
         
         // Funktion zum Hinzufügen von Temperaturen mit Ausrichtung
@@ -68,13 +68,15 @@
             let stack = widget.addStack();
             stack.layoutHorizontally();
             
-            let locationText = stack.addText(location + ': ');
+            let locationText = stack.addText(location);
             locationText.textColor = Color.white();
-            locationText.font = Font.systemFont(14); // Schriftgröße der Standortangabe auf 14 beibehalten
+            locationText.font = Font.systemFont(14); // Schriftgröße der Standortangabe auf 14 setzen
+            
+            stack.addSpacer(); // Leerzeichen einfügen, um rechtsbündige Ausrichtung der Temperatur zu ermöglichen
             
             let temperatureText = stack.addText(temperature);
             temperatureText.textColor = Color.white();
-            temperatureText.font = Font.systemFont(14); // Schriftgröße der Temperaturanzeige auf 14 beibehalten
+            temperatureText.font = Font.systemFont(20); // Schriftgröße der Temperaturanzeige auf 20 setzen
             
             widget.addSpacer(2);
         }
