@@ -2,6 +2,7 @@
     // URLs der Webseiten mit den Wassertemperaturen
     const urlBadWaldsee = 'https://www.wassertemperaturen.net/baden-wuerttemberg/stadtsee_bad_waldsee.html';
     const urlMuenchen = 'https://www.gkd.bayern.de/de/fluesse/wassertemperatur/kelheim/muenchen-himmelreichbruecke-16515005/messwerte';
+    const urlFeringasee = 'https://xn--wasserwacht-unterfhring-plc.de/feringasee/';
 
     // Funktion zum Laden und Parsen der Wassertemperatur von Bad Waldsee
     async function fetchWaterTemperatureBadWaldsee() {
@@ -33,22 +34,43 @@
         }
     }
 
+    // Funktion zum Laden und Parsen der Wassertemperatur von Feringasee
+    async function fetchWaterTemperatureFeringasee() {
+        const req = new Request(urlFeringasee);
+        const html = await req.loadString();
+        
+        const regex = /Feringasee sind es nach dem Stand.*?<\/br><b>(\d+\.\d+)<\/b> Grad Celius im Wasser/;
+        const match = html.match(regex);
+
+        if (match && match.length > 1) {
+            return match[1] + '°C';
+        } else {
+            return 'N/A';
+        }
+    }
+
     // Hauptfunktion zur Erstellung des Widgets
     async function createWidget() {
         const tempBadWaldsee = await fetchWaterTemperatureBadWaldsee();
         const tempMuenchen = await fetchWaterTemperatureMuenchen();
+        const tempFeringasee = await fetchWaterTemperatureFeringasee();
         
         let widget = new ListWidget();
         widget.addText('Wassertemperaturen:');
         widget.addSpacer(4);
         
-        let textBadWaldsee = widget.addText('Bad Waldsee: ' + tempBadWaldsee);
+        let textBadWaldsee = widget.addText('Stadtsee: ' + tempBadWaldsee);
         textBadWaldsee.textColor = Color.blue();
         
         widget.addSpacer(2);
         
-        let textMuenchen = widget.addText('München: ' + tempMuenchen);
+        let textMuenchen = widget.addText('Eisbach: ' + tempMuenchen);
         textMuenchen.textColor = Color.green();
+        
+        widget.addSpacer(2);
+        
+        let textFeringasee = widget.addText('Feringasee: ' + tempFeringasee);
+        textFeringasee.textColor = Color.red();
         
         return widget;
     }
