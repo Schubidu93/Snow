@@ -56,25 +56,33 @@
         const tempFeringasee = await fetchWaterTemperatureFeringasee();
         
         let widget = new ListWidget();
-        widget.backgroundColor = new Color("#000000"); // Hintergrund schwarz
-        widget.addText('Wassertemperaturen:').textColor = Color.white();
+        widget.backgroundColor = new Color("#4682B4"); // Hintergrundfarbe setzen
+        
+        let title = widget.addText('Wassertemperaturen:');
+        title.textColor = Color.white();
+        title.font = Font.boldSystemFont(12); // Schriftgröße des Titels auf 12 reduzieren
         widget.addSpacer(4);
         
-        let textBadWaldsee = widget.addText('Bad Waldsee: ' + tempBadWaldsee);
-        textBadWaldsee.textColor = Color.white();
-        textBadWaldsee.font = Font.systemFont(14); // Schriftgröße reduzieren
+        // Funktion zum Hinzufügen von Temperaturen mit Ausrichtung
+        function addTemperatureRow(location, temperature) {
+            let stack = widget.addStack();
+            stack.layoutHorizontally();
+            
+            let locationText = stack.addText(location + ': ');
+            locationText.textColor = Color.white();
+            locationText.font = Font.systemFont(14); // Schriftgröße der Standortangabe auf 14 beibehalten
+            
+            let temperatureText = stack.addText(temperature);
+            temperatureText.textColor = Color.white();
+            temperatureText.font = Font.systemFont(14); // Schriftgröße der Temperaturanzeige auf 14 beibehalten
+            
+            widget.addSpacer(2);
+        }
         
-        widget.addSpacer(2);
-        
-        let textMuenchen = widget.addText('Eisbach: ' + tempMuenchen);
-        textMuenchen.textColor = Color.white();
-        textMuenchen.font = Font.systemFont(14); // Schriftgröße reduzieren
-        
-        widget.addSpacer(2);
-        
-        let textFeringasee = widget.addText('Feringasee: ' + tempFeringasee);
-        textFeringasee.textColor = Color.white();
-        textFeringasee.font = Font.systemFont(14); // Schriftgröße reduzieren
+        // Temperaturen hinzufügen
+        addTemperatureRow('Bad Waldsee', tempBadWaldsee);
+        addTemperatureRow('München', tempMuenchen);
+        addTemperatureRow('Feringasee', tempFeringasee);
         
         return widget;
     }
