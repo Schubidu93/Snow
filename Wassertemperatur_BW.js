@@ -13,7 +13,7 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return match[1] + '°C';
+            return Math.round(parseFloat(match[1])) + '°';
         } else {
             return 'N/A';
         }
@@ -28,7 +28,7 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return match[1].replace(',', '.') + '°C';
+            return Math.round(parseFloat(match[1].replace(',', '.'))) + '°';
         } else {
             return 'N/A';
         }
@@ -43,7 +43,7 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return match[1] + '°C';
+            return Math.round(parseFloat(match[1])) + '°';
         } else {
             return 'N/A';
         }
@@ -60,7 +60,7 @@
         
         let title = widget.addText('Wassertemperaturen:');
         title.textColor = Color.white();
-        title.font = Font.boldSystemFont(12); // Schriftgröße des Titels auf 12 reduzieren
+        title.font = Font.boldSystemFont(10); // Schriftgröße des Titels auf 10 reduzieren
         widget.addSpacer(4);
         
         // Funktion zum Hinzufügen von Temperaturen mit Ausrichtung
