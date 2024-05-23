@@ -1,39 +1,64 @@
 (async () => {
-// URL der Webseite mit der Wassertemperatur
-const url = 'https://www.wassertemperaturen.net/baden-wuerttemberg/stadtsee_bad_waldsee.html';
+    // URLs der Webseiten mit den Wassertemperaturen
+    const urlBadWaldsee = 'https://www.wassertemperaturen.net/baden-wuerttemberg/stadtsee_bad_waldsee.html';
+    const urlMuenchen = 'https://www.gkd.bayern.de/de/fluesse/wassertemperatur/kelheim/muenchen-himmelreichbruecke-16515005/messwerte';
 
-// Funktion zum Laden und Parsen der Webseite
-async function fetchWaterTemperature() {
-    const req = new Request(url);
-    const html = await req.loadString();
-    const regex = /<P CLASS="strandtemp">\s*(\d+)&deg;C\s*<\/P>/;
-    const match = html.match(regex);
+    // Funktion zum Laden und Parsen der Wassertemperatur von Bad Waldsee
+    async function fetchWaterTemperatureBadWaldsee() {
+        const req = new Request(urlBadWaldsee);
+        const html = await req.loadString();
+        
+        const regex = /<P CLASS="strandtemp">\s*(\d+)&deg;C\s*<\/P>/;
+        const match = html.match(regex);
 
-    if (match && match.length > 1) {
-        return match[1] + '°C';
-    } else {
-        return 'N/A';
+        if (match && match.length > 1) {
+            return match[1] + '°C';
+        } else {
+            return 'N/A';
+        }
     }
-}
 
-// Hauptfunktion zur Erstellung des Widgets
-async function createWidget() {
-    const wassertemperatur = await fetchWaterTemperature();
-    
-    let widget = new ListWidget();
-    widget.addText('Wassertemperatur:');
-    widget.addSpacer(4);
-    widget.addText(wassertemperatur);
-    
-    return widget;
-}
+    // Funktion zum Laden und Parsen der Wassertemperatur von München Himmelreichbrücke
+    async function fetchWaterTemperatureMuenchen() {
+        const req = new Request(urlMuenchen);
+        const html = await req.loadString();
+        
+        const regex = /<td\s+class="center">(\d+,\d+)<\/td>/;
+        const match = html.match(regex);
 
-// Widget erstellen und anzeigen
-let widget = await createWidget();
-if (config.runsInWidget) {
-    Script.setWidget(widget);
-} else {
-    widget.presentSmall();
-}
-Script.complete();
+        if (match && match.length > 1) {
+            return match[1].replace(',', '.') + '°C';
+        } else {
+            return 'N/A';
+        }
+    }
+
+    // Hauptfunktion zur Erstellung des Widgets
+    async function createWidget() {
+        const tempBadWaldsee = await fetchWaterTemperatureBadWaldsee();
+        const tempMuenchen = await fetchWaterTemperatureMuenchen();
+        
+        let widget = new ListWidget();
+        widget.addText('Wassertemperaturen:');
+        widget.addSpacer(4);
+        
+        let textBadWaldsee = widget.addText('Bad Waldsee: ' + tempBadWaldsee);
+        textBadWaldsee.textColor = Color.blue();
+        
+        widget.addSpacer(2);
+        
+        let textMuenchen = widget.addText('München: ' + tempMuenchen);
+        textMuenchen.textColor = Color.green();
+        
+        return widget;
+    }
+
+    // Widget erstellen und anzeigen
+    let widget = await createWidget();
+    if (config.runsInWidget) {
+        Script.setWidget(widget);
+    } else {
+        widget.presentSmall();
+    }
+    Script.complete();
 })();
