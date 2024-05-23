@@ -48,53 +48,55 @@
             return 'N/A';
         }
     }
-// Funktion zur Berechnung der Farbe basierend auf der Temperatur
-function getColorForTemperature(temp) {
-    const minTemp = 0;  // Minimum für die Farbskala
-    const maxTemp = 30; // Maximum für die Farbskala
 
-    // Konvertiere Temperatur zu einer Zahl
-    const temperature = parseFloat(temp.replace('°C', '').replace(',', '.'));
+    // Funktion zur Berechnung der Farbe basierend auf der Temperatur
+    function getColorForTemperature(temp) {
+        const minTemp = 0;  // Minimum für die Farbskala
+        const maxTemp = 30; // Maximum für die Farbskala
 
-    // Begrenzen Sie die Temperatur auf den Bereich [minTemp, maxTemp]
-    const clampedTemp = Math.max(minTemp, Math.min(maxTemp, temperature));
+        // Konvertiere Temperatur zu einer Zahl
+        const temperature = parseFloat(temp.replace('°C', '').replace(',', '.'));
 
-    // Berechne den interpolierten Wert (0 bis 1)
-    const t = (clampedTemp - minTemp) / (maxTemp - minTemp);
+        // Begrenzen Sie die Temperatur auf den Bereich [minTemp, maxTemp]
+        const clampedTemp = Math.max(minTemp, Math.min(maxTemp, temperature));
 
-    // Berechne RGB-Werte
-    const r = Math.min(255, Math.max(0, Math.round(255 * (t - 0.5) * 2)));
-    const g = Math.min(255, Math.max(0, Math.round(255 * (1 - Math.abs(t - 0.5) * 2))));
-    const b = Math.min(255, Math.max(0, Math.round(255 * (0.5 - t) * 2)));
+        // Berechne den interpolierten Wert (0 bis 1)
+        const t = (clampedTemp - minTemp) / (maxTemp - minTemp);
 
-    return new Color(r, g, b);
-}
+        // Berechne RGB-Werte
+        const r = Math.min(255, Math.max(0, Math.round(255 * (t - 0.5) * 2)));
+        const g = Math.min(255, Math.max(0, Math.round(255 * (1 - Math.abs(t - 0.5) * 2))));
+        const b = Math.min(255, Math.max(0, Math.round(255 * (0.5 - t) * 2)));
 
-// Hauptfunktion zur Erstellung des Widgets
-async function createWidget() {
-    const tempBadWaldsee = await fetchWaterTemperatureBadWaldsee();
-    const tempMuenchen = await fetchWaterTemperatureMuenchen();
-    const tempFeringasee = await fetchWaterTemperatureFeringasee();
-    
-    let widget = new ListWidget();
-    widget.addText('Wassertemperaturen:');
-    widget.addSpacer(4);
-    
-    let textBadWaldsee = widget.addText('Bad Waldsee: ' + tempBadWaldsee);
-    textBadWaldsee.textColor = getColorForTemperature(tempBadWaldsee);
-    
-    widget.addSpacer(2);
-    
-    let textMuenchen = widget.addText('München: ' + tempMuenchen);
-    textMuenchen.textColor = getColorForTemperature(tempMuenchen);
-    
-    widget.addSpacer(2);
-    
-    let textFeringasee = widget.addText('Feringasee: ' + tempFeringasee);
-    textFeringasee.textColor = getColorForTemperature(tempFeringasee);
-    
-    return widget;
-}
+        return new Color(r, g, b);
+    }
+
+    // Hauptfunktion zur Erstellung des Widgets
+    async function createWidget() {
+        const tempBadWaldsee = await fetchWaterTemperatureBadWaldsee();
+        const tempMuenchen = await fetchWaterTemperatureMuenchen();
+        const tempFeringasee = await fetchWaterTemperatureFeringasee();
+        
+        let widget = new ListWidget();
+        widget.addText('Wassertemperaturen:');
+        widget.addSpacer(4);
+        
+        let textBadWaldsee = widget.addText('Bad Waldsee: ' + tempBadWaldsee);
+        textBadWaldsee.textColor = getColorForTemperature(tempBadWaldsee);
+        
+        widget.addSpacer(2);
+        
+        let textMuenchen = widget.addText('München: ' + tempMuenchen);
+        textMuenchen.textColor = getColorForTemperature(tempMuenchen);
+        
+        widget.addSpacer(2);
+        
+        let textFeringasee = widget.addText('Feringasee: ' + tempFeringasee);
+        textFeringasee.textColor = getColorForTemperature(tempFeringasee);
+        
+        return widget;
+    }
+
     // Widget erstellen und anzeigen
     let widget = await createWidget();
     if (config.runsInWidget) {
