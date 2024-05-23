@@ -6,7 +6,7 @@ const url = 'https://www.wassertemperaturen.net/baden-wuerttemberg/stadtsee_bad_
 async function fetchWaterTemperature() {
     const req = new Request(url);
     const html = await req.loadString();
-    const regex = /<P CLASS="strandtemp">(\d+)&deg;C<\/P>/;
+    const regex = /<P CLASS="strandtemp">\s*(\d+)&deg;C\s*<\/P>/;
     const match = html.match(regex);
 
     if (match && match.length > 1) {
