@@ -80,8 +80,8 @@
         }
         
         // Temperaturen hinzufügen
-        addTemperatureRow('Bad Waldsee', tempBadWaldsee);
-        addTemperatureRow('München', tempMuenchen);
+        addTemperatureRow('Stadtsee', tempBadWaldsee);
+        addTemperatureRow('Eisbach', tempMuenchen);
         addTemperatureRow('Feringasee', tempFeringasee);
         
         return widget;
