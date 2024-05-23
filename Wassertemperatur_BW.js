@@ -13,7 +13,7 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return Math.round(parseFloat(match[1])) + '°';
+            return parseFloat(match[1]).toFixed(1) + '°';
         } else {
             return 'N/A';
         }
@@ -28,7 +28,7 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return Math.round(parseFloat(match[1].replace(',', '.'))) + '°';
+            return parseFloat(match[1].replace(',', '.')).toFixed(1) + '°';
         } else {
             return 'N/A';
         }
@@ -43,7 +43,7 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return Math.round(parseFloat(match[1])) + '°';
+            return parseFloat(match[1]).toFixed(1) + '°';
         } else {
             return 'N/A';
         }
@@ -60,7 +60,7 @@
         
         let title = widget.addText('Wasser');
         title.textColor = Color.white();
-        title.font = Font.boldSystemFont(14); // Schriftgröße des Titels auf 14 setzen
+        title.font = Font.systemFont(14); // Schriftgröße des Titels auf 14 setzen
         widget.addSpacer(4);
         
         // Funktion zum Hinzufügen von Temperaturen mit Ausrichtung
