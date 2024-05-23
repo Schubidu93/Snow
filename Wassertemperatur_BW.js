@@ -59,12 +59,12 @@
         widget.addText('Wassertemperaturen:');
         widget.addSpacer(4);
         
-        let textBadWaldsee = widget.addText('Bad Waldsee: ' + tempBadWaldsee);
+        let textBadWaldsee = widget.addText('Stadtsee: ' + tempBadWaldsee);
         textBadWaldsee.textColor = Color.blue();
         
         widget.addSpacer(2);
         
-        let textMuenchen = widget.addText('München: ' + tempMuenchen);
+        let textMuenchen = widget.addText('Eisbach: ' + tempMuenchen);
         textMuenchen.textColor = Color.green();
         
         widget.addSpacer(2);
