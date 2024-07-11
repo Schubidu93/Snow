@@ -13,9 +13,9 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return match[1] + '°C';
+            return parseFloat(match[1]);
         } else {
-            return 'N/A';
+            return null;
         }
     }
 
@@ -28,9 +28,9 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return match[1].replace(',', '.') + '°C';
+            return parseFloat(match[1].replace(',', '.'));
         } else {
-            return 'N/A';
+            return null;
         }
     }
 
@@ -43,10 +43,28 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return match[1] + '°C';
+            return parseFloat(match[1]);
         } else {
-            return 'N/A';
+            return null;
         }
+    }
+
+    // Funktion zur Erstellung der Temperaturanzeige
+    function createTemperatureDisplay(location, temperature, stack) {
+        let row = stack.addStack();
+        row.layoutHorizontally();
+        
+        let locationText = row.addText(location);
+        locationText.textColor = Color.white();
+        locationText.font = Font.regularSystemFont(14);
+        locationText.leftAlignText();
+        
+        row.addSpacer();
+        
+        let tempText = row.addText(temperature !== null ? `${temperature.toFixed(1)}°C` : 'N/A');
+        tempText.textColor = Color.white();
+        tempText.font = Font.systemFont(20);
+        tempText.rightAlignText();
     }
 
     // Hauptfunktion zur Erstellung des Widgets
@@ -56,21 +74,25 @@
         const tempFeringasee = await fetchWaterTemperatureFeringasee();
         
         let widget = new ListWidget();
-        widget.addText('Wassertemperaturen:');
+        widget.backgroundColor = new Color("#4682B4"); // Hintergrundfarbe setzen
+        
+        // Titel
+        let titleStack = widget.addStack();
+        let title = titleStack.addText('Wasser');
+        title.textColor = Color.white();
+        title.font = Font.regularSystemFont(14); // Schriftgröße des Titels auf 14 setzen
+        titleStack.addSpacer();
         widget.addSpacer(4);
         
-        let textBadWaldsee = widget.addText('Stadtsee: ' + tempBadWaldsee);
-        textBadWaldsee.textColor = Color.blue();
+        // Temperaturen
+        let tempStack = widget.addStack();
+        tempStack.layoutVertically();
         
+        createTemperatureDisplay('Stadtsee', tempBadWaldsee, tempStack);
         widget.addSpacer(2);
-        
-        let textMuenchen = widget.addText('Eisbach: ' + tempMuenchen);
-        textMuenchen.textColor = Color.green();
-        
+        createTemperatureDisplay('Eisbach', tempMuenchen, tempStack);
         widget.addSpacer(2);
-        
-        let textFeringasee = widget.addText('Feringasee: ' + tempFeringasee);
-        textFeringasee.textColor = Color.red();
+        createTemperatureDisplay('Feringasee', tempFeringasee, tempStack);
         
         return widget;
     }
