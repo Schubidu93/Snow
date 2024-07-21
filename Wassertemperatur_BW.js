@@ -56,12 +56,12 @@
         
         let locationText = row.addText(location);
         locationText.textColor = Color.white();
-        locationText.font = Font.regularSystemFont(14);
+        locationText.font = Font.regularSystemFont(12); // Schriftgröße der Ortsnamen leicht reduzieren
         locationText.leftAlignText();
         
         row.addSpacer();
         
-        let tempText = row.addText(temperature !== null ? `${temperature.toFixed(1)}°C` : 'N/A');
+        let tempText = row.addText(temperature !== null ? `${temperature.toFixed(1)}°` : 'N/A');
         tempText.textColor = Color.white();
         tempText.font = Font.systemFont(20);
         tempText.rightAlignText();
