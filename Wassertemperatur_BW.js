@@ -80,7 +80,7 @@
         let titleStack = widget.addStack();
         let title = titleStack.addText('Wassertemperatur');
         title.textColor = Color.white();
-        title.font = Font.regularSystemFont(14); // Schriftgröße des Titels auf 14 setzen
+        title.font = Font.regularSystemFont(13); // Schriftgröße des Titels um 1 reduziert
         titleStack.addSpacer();
         widget.addSpacer(10); // Größerer Abstand nach dem Titel
         
