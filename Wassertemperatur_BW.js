@@ -13,9 +13,9 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return parseFloat(match[1]).toFixed(1) + '°';
+            return parseFloat(match[1]);
         } else {
-            return 'N/A';
+            return null;
         }
     }
 
@@ -28,9 +28,9 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return parseFloat(match[1].replace(',', '.')).toFixed(1) + '°';
+            return parseFloat(match[1].replace(',', '.'));
         } else {
-            return 'N/A';
+            return null;
         }
     }
 
@@ -43,56 +43,58 @@
         const match = html.match(regex);
 
         if (match && match.length > 1) {
-            return parseFloat(match[1]).toFixed(1) + '°';
+            return parseFloat(match[1]);
         } else {
-            return 'N/A';
+            return null;
         }
     }
 
-// Funktion zur Erstellung des Widgets
+    // Funktion zur Erstellung der Temperaturanzeige
+    function createTemperatureDisplay(location, temperature, stack) {
+        let row = stack.addStack();
+        row.layoutHorizontally();
+        
+        let locationText = row.addText(location);
+        locationText.textColor = Color.white();
+        locationText.font = Font.regularSystemFont(12); // Schriftgröße der Ortsnamen leicht reduzieren
+        locationText.leftAlignText();
+        
+        row.addSpacer();
+        
+        let tempText = row.addText(temperature !== null ? `${temperature.toFixed(1)}` : 'N/A');
+        tempText.textColor = Color.white();
+        tempText.font = Font.systemFont(20);
+        tempText.rightAlignText();
+    }
+
+    // Hauptfunktion zur Erstellung des Widgets
     async function createWidget() {
-        // Wassertemperaturen von den verschiedenen Orten abrufen
         const tempBadWaldsee = await fetchWaterTemperatureBadWaldsee();
         const tempMuenchen = await fetchWaterTemperatureMuenchen();
         const tempFeringasee = await fetchWaterTemperatureFeringasee();
         
-        // Widget erstellen
         let widget = new ListWidget();
         widget.backgroundColor = new Color("#4682B4"); // Hintergrundfarbe setzen
-
-        // Ort und Wassertemperatur anzeigen
-        let locationStack = widget.addStack();
-        locationStack.layoutVertically();
-        locationStack.addSpacer(); // Platzhalter für oberen Rand
         
-        // Ortsname anzeigen
-        let locationText = locationStack.addText("Wasser");
-        locationText.font = Font.regularSystemFont(14); // Schriftgröße festlegen
-        locationText.leftAlignText(); // Text linksbündig ausrichten
-        locationText.textColor = Color.white(); // Textfarbe festlegen
+        // Titel
+        let titleStack = widget.addStack();
+        let title = titleStack.addText('Wassertemperatur');
+        title.textColor = Color.white();
+        title.font = Font.regularSystemFont(14); // Schriftgröße des Titels auf 14 setzen
+        titleStack.addSpacer();
+        widget.addSpacer(10); // Größerer Abstand nach dem Titel
         
-        // Wassertemperaturen anzeigen
-        addTemperatureRow(locationStack, 'Stadtsee', tempBadWaldsee);
-        addTemperatureRow(locationStack, 'Eisbach', tempMuenchen);
-        addTemperatureRow(locationStack, 'Feringasee', tempFeringasee);
+        // Temperaturen
+        let tempStack = widget.addStack();
+        tempStack.layoutVertically();
+        
+        createTemperatureDisplay('Stadtsee', tempBadWaldsee, tempStack);
+        widget.addSpacer(2);
+        createTemperatureDisplay('Eisbach', tempMuenchen, tempStack);
+        widget.addSpacer(2);
+        createTemperatureDisplay('Feringasee', tempFeringasee, tempStack);
         
         return widget;
-    }
-
-    // Funktion zum Hinzufügen einer Zeile mit Ortsname und Wassertemperatur
-    function addTemperatureRow(stack, location, temperature) {
-        let stackRow = stack.addStack();
-        stackRow.layoutHorizontally();
-        
-        let locationText = stackRow.addText(location + ': ');
-        locationText.textColor = Color.white();
-        locationText.font = Font.systemFont(14);
-        
-        stackRow.addSpacer();
-        
-        let temperatureText = stackRow.addText(temperature);
-        temperatureText.textColor = Color.white();
-        temperatureText.font = Font.systemFont(20);
     }
 
     // Widget erstellen und anzeigen
