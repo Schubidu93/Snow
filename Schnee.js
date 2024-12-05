@@ -20,24 +20,30 @@
 
         
         let locationText = widget.addText(`${pinEmoji} München`); // Ortsname über der Zahl
-        locationText.font = Font.regularSystemFont(12); // Kleinere Schriftgröße für den Ortsnamen
+        locationText.font = Font.regularSystemFont(14); // Kleinere Schriftgröße für den Ortsnamen
         locationText.leftAlignText(); // Text linksbündig
         locationText.textColor = Color.white(); // Schwarzer Text
 
-        let snowHeightText = widget.addText(snowHeight.toString()); // Schneehöhe als Zahl ohne "cm"
-        snowHeightText.font = Font.regularSystemFont(44); // Mittlere Schriftgröße für die Schneehöhe
-        snowHeightText.leftAlignText(); // Text linksbündig
-        snowHeightText.textColor = Color.white(); // Schwarzer Text
+        let mainStack = widget.addStack();
+        mainStack.layoutHorizontally();
+        
+        let snowHeightText = mainStack.addText(snowHeight.toString());
+        snowHeightText.font = Font.regularSystemFont(44);
+        snowHeightText.textColor = Color.white();
+        
+        let cmStack = mainStack.addStack();
+        cmStack.layoutVertically();
+        
+        cmStack.addSpacer(30); // Verstellbare Spacer-Größe für die Ausrichtung
+        let cmText = cmStack.addText(" cm");
+        cmText.font = Font.regularSystemFont(14);
+        cmText.textColor = Color.white();
 
-        let cmText = widget.addText("cm"); // "cm" Text
-        cmText.font = Font.regularSystemFont(14); // Kleine Schriftgröße für "cm"
-        cmText.textColor = Color.white(); // Schwarzer Text
-        cmText.leftAlignText(); // Text linksbündig
         
         widget.addSpacer(20); // Größerer Zeilenabstand
 
         let snowInfoText = widget.addText(`Schneehöhe`); // Schneehöhe Info mit Emojis
-        snowInfoText.font = Font.regularSystemFont(12); // Kleine Schriftgröße für die Schneehöhe Info
+        snowInfoText.font = Font.regularSystemFont(14); // Kleine Schriftgröße für die Schneehöhe Info
         snowInfoText.leftAlignText(); // Text linksbündig
         snowInfoText.textColor = Color.white(); // Schwarzer Text
 
